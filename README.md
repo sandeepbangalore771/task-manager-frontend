@@ -1,70 +1,98 @@
-# Getting Started with Create React App
+# Task Manager Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Table of Contents
+- [Project Overview](#project-overview)
+- [Setup and Installation](#setup-and-installation)
+- [Running the Project](#running-the-project)
+- [Assumptions](#assumptions)
+- [Technologies and Libraries Used](#technologies-and-libraries-used)
+- [Challenges Faced](#challenges-faced)
 
-## Available Scripts
+## Project Overview
+The **Task Manager Application** is a full-stack web application that allows users to create, update, delete, and manage tasks efficiently. The frontend is built using React.js, while the backend is powered by Node.js, Express.js, and MongoDB.
 
-In the project directory, you can run:
+## Setup and Installation
+### Prerequisites
+Ensure you have the following installed on your system:
+- **Node.js** (v14 or later)
+- **MongoDB** (local or MongoDB Atlas)
+- **Git**
 
-### `npm start`
+### Clone the Repository
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+git clone https://github.com/yourusername/task-manager.git
+cd task-manager
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+### Backend Setup
+1. Navigate to the backend folder:
+   cd server
+  
+2. Install dependencies:
+  
+   npm install
+   
+3. Create a `.env` file in the `server` directory and configure it with the following environment variables:
+   
+   PORT=5000
+   MONGO_URI=your_mongodb_connection_string
+   JWT_SECRET=your_jwt_secret
+ 
+4. Start the backend server:
+   
+   npm start
+   
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Frontend Setup
+1. Navigate to the frontend folder:
+  
+   cd ../client
+   
+2. Install dependencies:
+  
+   npm install
+  
+3. Start the React development server:
+   
+   npm start
+   
 
-### `npm run build`
+## Running the Project
+Once both frontend and backend servers are running, open your browser and go to:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+http://localhost:3000
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Assumptions
+- Each user can only see their own tasks.
+- User authentication is implemented using JWT.
+- Tasks have fields like **title, category, status (pending/completed)**.
+- The API expects authorization headers for protected routes.
 
-### `npm run eject`
+## Technologies and Libraries Used
+### Frontend:
+- React.js
+- React Router
+- Axios (for API calls)
+- fortawesome Icons (for UI icons)
+- Bootstrap (for styling)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Backend:
+- Node.js
+- Express.js
+- MongoDB (Mongoose ODM)
+- JWT (for authentication)
+- Bcrypt.js (for password hashing)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Challenges Faced
+### 1. **Handling Authentication and Authorization**
+   - Issue: Ensuring only authenticated users can access their tasks.
+   - Solution: Implemented JWT-based authentication and middleware to protect routes.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 2. **Filtering and Searching Tasks**
+   - Issue: Implementing dynamic filtering based on category and status.
+   - Solution: Used React state and filter functions to dynamically update task lists.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### 3. **Connecting Frontend with Backend**
+   - Issue: Handling API request errors and token-based authentication.
+   - Solution: Used Axios with error handling and stored tokens securely in local storage.
