@@ -20,27 +20,8 @@ Ensure you have the following installed on your system:
 
 ### Clone the Repository
 
-git clone https://github.com/yourusername/task-manager.git
+git clone https://github.com/sandeepbangalore771/task-manager-frontend.git
 cd task-manager
-
-
-### Backend Setup
-1. Navigate to the backend folder:
-   cd server
-  
-2. Install dependencies:
-  
-   npm install
-   
-3. Create a `.env` file in the `server` directory and configure it with the following environment variables:
-   
-   PORT=5000
-   MONGO_URI=your_mongodb_connection_string
-   JWT_SECRET=your_jwt_secret
- 
-4. Start the backend server:
-   
-   npm start
    
 
 ### Frontend Setup
