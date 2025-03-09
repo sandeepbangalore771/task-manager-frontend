@@ -58,12 +58,7 @@ http://localhost:3000
 - fortawesome Icons (for UI icons)
 - Bootstrap (for styling)
 
-### Backend:
-- Node.js
-- Express.js
-- MongoDB (Mongoose ODM)
-- JWT (for authentication)
-- Bcrypt.js (for password hashing)
+
 
 ## Challenges Faced
 ### 1. **Handling Authentication and Authorization**
