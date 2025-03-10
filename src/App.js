@@ -15,7 +15,7 @@ function App() {
       <Routes>
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/" element={<Layout><Dashboard /></Layout>} />
+        <Route path="/" element={<PrivateRoute component={() => <Layout><Dashboard /></Layout>} />} />
         <Route path="/tasks" element={<PrivateRoute component={() => <Layout><TaskList /></Layout>} />} />
         <Route path="/add-task" element={<PrivateRoute component={() => <Layout><AddTask /></Layout>} />} />
       </Routes>
