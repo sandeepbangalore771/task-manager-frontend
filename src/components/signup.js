@@ -42,7 +42,7 @@ const Signup = () => {
     e.preventDefault();
     if (!validateForm()) return;
 
-    setLoading(true); // Start loading
+    setLoading(true);
     try {
       const response = await API.post("/auth/signup", form);
       if (response.status === 201) {
