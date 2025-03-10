@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = (userData) => {
     setUser(userData);
-    localStorage.setItem("user", JSON.stringify(userData)); // Store user in local storage
+    localStorage.setItem("user", JSON.stringify(userData));
   };
 
   const logout = () => {
@@ -30,7 +30,6 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
-// Custom Hook to use AuthContext
 export const useAuth = () => {
   return useContext(AuthContext);
 };
