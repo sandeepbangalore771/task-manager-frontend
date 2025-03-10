@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import ToastMessage from "./toastMessage";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Button, Spinner } from "react-bootstrap";
 
 const Signup = () => {
   const [form, setForm] = useState({ name: "", email: "", password: "" });
@@ -12,6 +13,7 @@ const Signup = () => {
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
   const [toastType, setToastType] = useState("success");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const validateForm = () => {
@@ -40,6 +42,7 @@ const Signup = () => {
     e.preventDefault();
     if (!validateForm()) return;
 
+    setLoading(true); // Start loading
     try {
       const response = await API.post("/auth/signup", form);
       if (response.status === 201) {
@@ -51,9 +54,17 @@ const Signup = () => {
         }, 2000);
       }
     } catch (error) {
-      setToastMessage(error.response?.data?.message || "Signup failed. Try again.");
-      setToastType("error");
-      setShowToast(true);
+      const errorMessage = error.response.data.error || "Signup failed. Try again.";
+      console.log(errorMessage);
+      if (errorMessage === "Email already exists") {
+        setErrors((prevErrors) => ({ ...prevErrors, email: errorMessage }));
+      } else {
+        setToastMessage(errorMessage);
+        setToastType("error");
+        setShowToast(true);
+      }
+    } finally {
+      setLoading(false); 
     }
   };
 
@@ -114,7 +125,14 @@ const Signup = () => {
             </div>
           </div>
 
-          <button type="submit" className="btn btn-primary w-100">Signup</button>
+          <Button 
+            type="submit" 
+            className="w-100" 
+            style={{ background: "linear-gradient(to right, #4f6beb, #8458eb)" }} 
+            disabled={loading}
+          >
+            {loading ? <Spinner animation="border" size="sm" /> : "Signup"}
+          </Button>
         </form>
 
         <div className="text-center mt-3">

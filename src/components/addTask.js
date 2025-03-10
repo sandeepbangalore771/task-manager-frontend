@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../services/api";
-import { Button, Card, Container, Form, Row, Col } from "react-bootstrap";
+import { Button, Card, Container, Form, Row, Col, Spinner } from "react-bootstrap";
 import ToastMessage from "./toastMessage";
 
 const AddTask = () => {
@@ -12,6 +12,7 @@ const AddTask = () => {
   const [dueDate, setDueDate] = useState("");
   const [errors, setErrors] = useState({});
   const [toast, setToast] = useState({ show: false, message: "", type: "success" });
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const validateForm = () => {
@@ -28,8 +29,9 @@ const AddTask = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) {
-      return; 
+      return;
     }
+    setLoading(true);
     try {
       await API.post(
         "/tasks",
@@ -42,6 +44,8 @@ const AddTask = () => {
     } catch (error) {
       setToast({ show: true, message: "Failed to add task!", type: "danger" });
       setTimeout(() => setToast({ show: false, message: "", type: "danger" }), 3000);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -90,13 +94,13 @@ const AddTask = () => {
                 <Form.Control.Feedback type="invalid">{errors.priority}</Form.Control.Feedback>
               </Form.Group>
 
-              <Form.Group className="mb-3">
+              <Form.Group className="mb-3" style={{ cursor: "pointer" }}>
                 <Form.Control type="date" value={dueDate} onChange={(e) => setDueDate(e.target.value)} isInvalid={!!errors.dueDate} />
                 <Form.Control.Feedback type="invalid">{errors.dueDate}</Form.Control.Feedback>
               </Form.Group>
 
-              <Button type="submit" className="w-100" style={{background:"linear-gradient(to right, #4f6beb, #8458eb)"}}>
-                Add Task
+              <Button type="submit" className="w-100" disabled={loading} style={{ background: "linear-gradient(to right, #4f6beb, #8458eb)" }}>
+                {loading ? <Spinner animation="border" size="sm" /> : "Add Task"}
               </Button>
             </Form>
           </Card>
