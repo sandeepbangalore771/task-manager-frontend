@@ -15,7 +15,6 @@ const Signup = () => {
   const [toastType, setToastType] = useState("success");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
   const validateForm = () => {
     let newErrors = {};
     if (!form.name.trim()) newErrors.name = "Name is required.";
